@@ -1,0 +1,76 @@
+{{page-title "EditContact"}}
+
+
+<section class="form-container">
+
+  <form>
+
+    <div>
+      {{#if this.isChoosedAvatar}}
+        <span {{action "chooseAvatar"}} class="close-avatar-container">
+          <i class="fa fa-window-close" aria-hidden="true"></i>
+        </span>
+        <div class="avatar-container">
+          {{#each this.profileAvatars as |item|}}
+            <img
+              src="{{item}}"
+              alt="profile-avatar"
+              class="profile-avatars {{if (eq this.model.image item) "selected-profile"}}"
+              {{action "setContactImage" item}}
+              />
+          {{/each}}
+        </div>
+        <div class="validation-message">{{this.NoProfileChoosedMessage}}</div>
+      {{else}}
+        <Input
+          @type="url"
+          @value={{this.model.image}}
+          placeholder="paste your image url"
+        />
+        <div class="validation-message">{{this.urlValidationMessage}}</div>
+
+        <button type="button" {{action "chooseAvatar"}} class="choose-avatar-btn">Choose avatar</button>
+      {{/if}}
+    </div>
+
+
+
+    <div>
+      <Input
+        @type="text"
+        @value={{this.model.name}}
+        placeholder="contact name"
+      />
+      <div class="validation-message">{{this.contactNameValidationMessage}}</div>
+    </div>
+
+
+    <NumberInput @model={{this.model}} @errorMessageArray={{this.errorMessageArray}} />
+
+
+    <div>
+      <Input
+        @type="email"
+        @value={{this.model.email}}
+        placeholder="contact email"
+      />
+      <div class="validation-message">{{this.contactEmailValidationMessage}}</div>
+    </div>
+
+    <div>
+      <Textarea
+        @value={{this.model.description}}
+        placeholder="description"
+        {{!-- cols="35"
+        rows="4" --}}
+      />
+    </div>
+
+    <div>
+      <button {{action "saveContactData"}}>Save</button>
+      <button {{action "cancelThisOperation"}}>Cancel</button>
+    </div>
+
+  </form>
+
+</section>

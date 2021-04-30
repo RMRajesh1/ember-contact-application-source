@@ -1,0 +1,18 @@
+{{page-title "Contacts"}}
+
+
+<section class="contact-page">
+
+  <LinkTo @route="edit-contact" @model="new" class="create-contact-anchor">
+    create contact
+  </LinkTo>
+
+  <div class="list-container">
+    <div class="sub-list-container">
+      <ContactList @contacts={{this.model}} />
+    </div>
+{{!-- the detailed view content will replace the outlet --}}
+    {{outlet}}
+  </div>
+
+</section>

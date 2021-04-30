@@ -1,0 +1,35 @@
+
+<div class="list-filter-container">
+
+  <select name="selectNumberType" id="selectNumberType" onchange={{action (fn filterByNUmberType) value="target.value" }}>
+    <option value="0">personal</option>
+    <option value="1">company</option>
+    <option value="2">landline</option>
+    <option value="3">others</option>
+    <option value="4" selected>All</option>
+  </select>
+
+
+  <Input
+    @type="text"
+    placeholder="search"
+    @value={{this.searchValue}}
+    @input={{this.filterBySearch}}
+    autofocus="true"
+  />
+
+</div>
+
+
+
+<ul>
+  {{#each this.showContacts as |contact|}}
+    {{#link-to "contacts.detail-view" contact.id }}
+      <ListItem @contact={{contact}} />
+    {{/link-to}}
+  {{/each}}
+
+  {{#if this.isNoContactsAvailable}}
+    <p>No contacts available!</p>
+  {{/if}}
+</ul>

@@ -1,0 +1,35 @@
+{{page-title "DetailView"}}
+
+<section class="detail-view-container">
+  <div class="detail-view">
+    <img src="{{this.model.image}}" alt="contact-image">
+    <div class="contact-date">
+      {{format-date this.model.date "1"}}
+    </div>
+    <p class="contact-name">{{this.model.name}}</p>
+
+    {{#each this.model.number as |number|}}
+      <p>
+        <a href="tel:+{{number.number}}">
+          <span class="contact-numbers">{{number.number}}</span>
+          <span>&nbsp;-&nbsp;</span>
+          <span class="number-types">{{number-type number.type}}</span>
+        </a>
+      </p>
+    {{/each}}
+
+    {{#if this.model.email}}
+      <p class="contact-mail">mail-id : <a href="mailto:{{this.model.email}}">{{this.model.email}}</a></p>
+    {{/if}}
+
+    <p class="contact-description">{{this.model.description}}</p>
+
+    <div>
+      <LinkTo @route="edit-contact" @model={{this.model.id}} class="edit-contact-btn">
+        <button>Edit</button>
+      </LinkTo>
+      <button {{action "deleteContact"}} class="delete-contact-btn">Delete</button>
+    </div>
+  </div>
+
+</section>

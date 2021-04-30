@@ -1,0 +1,151 @@
+@import './snippets.less';
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: 0.2s;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  .flex-box-center();
+}
+
+
+
+.view-contacts-anchor {
+  padding: 20px;
+  color: #f2f2f2;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+}
+
+.create-contact-anchor {
+  padding: 15px;
+  margin: 20px;
+  color: #f2f2f2;
+  border-radius: 5px;
+  background-color: rgba(50, 24, 73);
+}
+
+form {
+  width: 500px;
+  height: 500px;
+  border: 1px solid #222;
+  border-radius: 10px;
+  // .flex-box-center();
+  // flex-direction: column;
+
+  & input {
+    margin-top: 20px;
+  }
+}
+
+
+ul {
+  width: 60%;
+  height: 90%;
+  border: 1px solid #222;
+  overflow: auto;
+
+  & li {
+    width: 100%;
+    padding: 10px;
+    min-height: 100px;
+    border-bottom: 1px dotted #222;
+    .flex-box-space-evenly();
+    // flex-direction: row;
+
+    & img {
+      width: 100px;
+      height: 100px;
+    }
+
+    & div {
+      width: 60%;
+      height: 70%;
+      border: 1px solid #222;
+
+      & p {
+        margin: 5px;
+      }
+    }
+  }
+}
+
+
+
+.contact-page {
+  width: 100vw;
+  height: 100vh;
+  .flex-box-center();
+  flex-direction: column;
+
+  .list-container {
+    width: 80%;
+    height: 80%;
+    border: 1px solid #222;
+    .flex-box-center();
+
+    & .sub-list-container {
+      width: 50%;
+      height: 90%;
+      .flex-box-space-evenly();
+      flex-direction: column;
+      // border: 1px solid blue;
+    }
+  }
+
+  .detail-view {
+    width: 40%;
+    height: 80%;
+    border: 1px solid #222;
+    .flex-box-center();
+    flex-direction: column;
+
+    & img {
+      width: 250px;
+      height: 250px;
+    }
+
+    & p {
+      margin: 5px;
+    }
+
+  }
+}
+
+
+.number-input-container {
+  width: 80%;
+  .flex-box-center();
+}
+
+
+.span-btn {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px;
+  color: #f2f2f2;
+  font-size: 25px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+.avatar-container {
+  width: 260px;
+  height: 170px;
+
+  & img {
+    width: 80px;
+    height: 80px;
+  }
+
+  & .selected-profile {
+    border: 1px solid #000;
+  }
+}
