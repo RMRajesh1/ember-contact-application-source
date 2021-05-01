@@ -8,6 +8,7 @@
 
   form {
     width: 50%;
+    padding: 10px auto;
     min-height: 80%;
     .flex-box-space-evenly();
     flex-direction: column;
@@ -19,18 +20,19 @@
       .flex-box-center();
       flex-direction: column;
 
-      input {
-        width: @input-box-width;
-        height: 30px;
+      input, textarea {
+        margin: 5px auto;
         padding: 5px 10px;
+        width: @input-box-width;
         border: 1px solid #000;
       }
 
+      input {
+        height: 30px;
+      }
+
       textarea {
-        width: @input-box-width;
         height: 100px;
-        padding: 5px 10px;
-        border: 1px solid #000;
       }
 
       .choose-avatar-btn {
@@ -56,11 +58,12 @@
         width: 400px;
         height: 250px;
         .flex-box-space-evenly();
-        border: 1px solid #000;
+        border: 1px solid transparent;
 
         .profile-avatars {
           width: 100px;
           height: 100px;
+          cursor: pointer;
         }
 
         .selected-profile {
@@ -113,7 +116,7 @@
             margin: 5px auto;
           }
           & > select {
-            width: 100px;
+            width: 150px;
             height: 30px;
           }
         }
@@ -135,5 +138,40 @@
     }
   }
 
+
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+
+  @input-box-width: 80%;
+
+  .form-container {
+    form {
+      width: 95%;
+      min-height: 80%;
+      & > div {
+        .avatar-container {
+          width: 100%;
+        }
+        input, textarea {
+          width: @input-box-width;
+        }
+      }
+      & > div:nth-last-child(1) {
+        width: 80%;
+      }
+      .number-input-container {
+        .number-input-sub-container {
+          width: 100%;
+          .inner-container {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 
 }

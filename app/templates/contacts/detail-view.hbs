@@ -9,12 +9,14 @@
     <p class="contact-name">{{this.model.name}}</p>
 
     {{#each this.model.number as |number|}}
-      <p>
-        <a href="tel:+{{number.number}}">
-          <span class="contact-numbers">{{number.number}}</span>
-          <span>&nbsp;-&nbsp;</span>
-          <span class="number-types">{{number-type number.type}}</span>
-        </a>
+      <p class="numbers-container">
+        <span class="contact-numbers">
+          <a href="tel:+{{number.number}}">
+            {{number.number}}
+          </a>
+        </span>
+        <span>&nbsp;-&nbsp;</span>
+        <span class="number-types">{{number-type number.type}}</span>
       </p>
     {{/each}}
 
