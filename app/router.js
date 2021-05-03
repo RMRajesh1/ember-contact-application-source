@@ -9,7 +9,7 @@ export default class Router extends EmberRouter {
 Router.map(function () {
   this.route('edit-contact', { path: '/edit-contact/:contact_id'});
   this.route('contacts', function() {
-    this.route('detail-view', { path: '/:contact_id' });
+    this.route('contact', { path: '/:contact_id' });
   });
   this.route('not-found', { path: '/*path' });
 });

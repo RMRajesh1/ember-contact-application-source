@@ -1,0 +1,39 @@
+
+<div class="number-input-container">
+
+  {{#each this.model.number as |number|}}
+
+    <div class="number-input-sub-container">
+
+      <div class="inner-container">
+        <Input
+          @type="tel"
+          @value={{number.number}}
+          placeholder="contact number"
+          onkeypress={{this.preventAlphaInput}}
+        />
+
+        <select name="selectNumberType" id="selectNumberType" onchange={{action (fn setNumberType number) value="target.value" }} >
+          {{#each this.numberType.numberTypes as |item|}}
+            <option value={{item.code}} selected={{eq number.type item.code}}>{{item.type}}</option>
+          {{/each}}
+        </select>
+
+        {{#if (gt this.model.number.length 1)}}
+          <span class="span-btn" {{on "click" (fn this.removeNumber number)}}>
+            <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+          </span>
+        {{/if}}
+
+      </div>
+
+      <div class="validation-message">{{this.contactNumberValidationMessage}}</div>
+    </div>
+
+  {{/each}}
+
+  <span class="span-btn" {{on "click" this.addNumber}}>
+    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+  </span>
+
+</div>

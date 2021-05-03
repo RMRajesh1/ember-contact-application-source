@@ -15,13 +15,13 @@ export default class EditContactController extends Controller {
 
   @tracked isChoosedAvatar = false;
 
+  defaultContactImage = '/assets/images/call-profile.svg';
   profileAvatars = ['/assets/images/avatar.svg', '/assets/images/women-avatar.png', '/assets/images/call-profile.svg', '/assets/images/telephone-icon.jpeg', '/assets/images/woman-sporty-brunette.webp', '/assets/images/avatar-370-456322-512.webp'];
 
   @action
   saveContactData() {
     if (this.checkInputFields()) {
-      let date = new Date().getTime();
-      this.model.date = (this.model.date) ? 'edited on ' + date : 'created on ' + date;
+      this.model.date = new Date().getTime();
       this.model.number.forEach((element) => {element.save()});
       this.model.save();
       this.router.transitionTo('contacts');
@@ -30,10 +30,12 @@ export default class EditContactController extends Controller {
 
   @action
   cancelThisOperation() {
-    this.model.number.forEach((element) => {
-      if (element != undefined) { element.rollbackAttributes(); }
-    })
+    this.model.number.forEach(element => element.rollbackAttributes());
     this.model.rollbackAttributes();
+    this.urlValidationMessage ='';
+    this.contactNameValidationMessage = '';
+    this.contactEmailValidationMessage = '';
+    this.NoProfileChoosedMessage = '';
     this.router.transitionTo('contacts');
   }
 
@@ -43,8 +45,7 @@ export default class EditContactController extends Controller {
     defaultImage = '/assets/images/call-profile.svg';
     isValidName = (instance.name == null || !instance.name) ? false : (/^[a-zA-Z0-9 .]+$/).test(instance.name);
     isValidEmail = (!instance.email) ? true : (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/).test(instance.email);
-    isValidUrl = (instance.image && this.profileAvatars.includes(instance.image)) ? true : (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/).test(instance.image);
-
+    isValidUrl = ((instance.image && this.profileAvatars.includes(instance.image)) || !instance.image) ? true : (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/).test(instance.image);
 
     if (!isValidUrl) {
       this.urlValidationMessage = 'This url isn\'t valid!';
@@ -74,7 +75,7 @@ export default class EditContactController extends Controller {
         errorMessages[index].querySelector('.validation-message').innerText = (!item.number) ? 'Contact number is required' : 'This number is invalid!';
       }
     });
-    return (isValidName && isValidEmail && isValidUrl && (validNumberCount == this.model.number.length));
+    return (isValidName && isValidEmail && isValidUrl && (validNumberCount && validNumberCount == this.model.number.length));
   }
 
 
@@ -91,4 +92,5 @@ export default class EditContactController extends Controller {
     this.model.image = item;
     this.NoProfileChoosedMessage = '';
   }
+
 }
